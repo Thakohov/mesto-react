@@ -21,8 +21,3 @@
 - Webpack
 - Запросы на сервер
 - React
-
-
-## Ссылка на проект:
-
-https://thakohov.github.io/mesto/
