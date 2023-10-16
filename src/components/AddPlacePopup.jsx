@@ -1,6 +1,5 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function AddPlacePopup({ isOpen, onClose, onUpdateUser }) {
   const [link, setLink] = React.useState("");
@@ -13,6 +12,13 @@ export default function AddPlacePopup({ isOpen, onClose, onUpdateUser }) {
   function handleChangePlace(e) {
     setPlace(e.target.value);
   }
+
+  React.useEffect(() => {
+    if(!isOpen) {
+      setLink('');
+      setPlace('');
+    }
+  })
 
   function handleSubmit(evt) {
     evt.preventDefault();

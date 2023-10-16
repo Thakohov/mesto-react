@@ -26,7 +26,6 @@ function App() {
   React.useEffect(() => {
     Promise.all([Api.getInitialCards(), Api.getUserInfo()])
       .then(([items, user]) => {
-        console.log(items);
         setCards(items);
         setCurrentUser(user);
       })
@@ -108,7 +107,6 @@ function App() {
   const handleAddPlaceSubmit = (info) => {
     Api.createCard(info)
       .then((newCard) => {
-        console.log(newCard);
         setCards([newCard, ...cards]);
         closeAllPopups();
       })

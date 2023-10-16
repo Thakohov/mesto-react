@@ -2,12 +2,7 @@ import React from "react";
 import PopupWithForm from "./PopupWithForm";
 
 export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const [value, setValue] = React.useState("");
   const avatarRef = React.useRef();
-
-  function handleChange(e) {
-    setValue(e.target.value);
-  }
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -15,8 +10,13 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     onUpdateAvatar({
       avatar: avatarRef.current.value,
     });
-    setValue("");
   }
+
+  React.useEffect(() => {
+    if(!isOpen) {
+      avatarRef.current.value = '';
+    }
+  })
 
   return (
     <PopupWithForm
@@ -35,8 +35,6 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
           name="avatar"
           placeholder="Введите ссылку"
           required
-          value={value}
-          onChange={handleChange}
           ref={avatarRef}
         />
         <span className="popup__error avatar-error"></span>
