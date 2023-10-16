@@ -33,11 +33,11 @@ class Api {
     }).then((res) => this._resAccepted(res));
   }
 
-  setUserInfo({ name, job }) {
+  setUserInfo(data) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
-      body: JSON.stringify({ name, about: job }),
+      body: JSON.stringify({ name: data.name, about: data.about }),
     }).then((res) => this._resAccepted(res));
   }
 
@@ -48,16 +48,9 @@ class Api {
     }).then((res) => this._resAccepted(res));
   }
 
-  setLikes(cardId) {
+  changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then((res) => this._resAccepted(res));
-  }
-
-  deleteLikes(cardId) {
-    return fetch(`${this._url}/cards/${cardId}/likes`, {
-      method: "DELETE",
+      method: `${!isLiked ? 'DELETE' : 'PUT'}`,
       headers: this._headers,
     }).then((res) => this._resAccepted(res));
   }
